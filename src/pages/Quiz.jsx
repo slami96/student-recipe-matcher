@@ -55,10 +55,11 @@ const Quiz = () => {
       question: 'Favorite type of food?',
       options: [
         { value: 'any', label: 'Any - Just feed me' },
-        { value: 'Italian', label: 'Italian - Pasta all day' },
-        { value: 'American', label: 'American - Classic comfort food' },
-        { value: 'Indian', label: 'Indian - Spicy and flavorful' },
-        { value: 'Chinese', label: 'Chinese - Quick stir-fries' }
+        { value: 'Italian', label: 'Italian - Pasta & Pizza' },
+        { value: 'American', label: 'American - Burgers & Comfort Food' },
+        { value: 'Chinese', label: 'Chinese - Stir-fries & Noodles' },
+        { value: 'British', label: 'British - Simple & Hearty' },
+        { value: 'Mexican', label: 'Mexican - Tacos & Burritos' }
       ]
     }
   ]
