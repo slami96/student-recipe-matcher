@@ -4,7 +4,7 @@ const API_BASE = 'https://www.themealdb.com/api/json/v1/1'
 // Fetch recipes based on quiz preferences
 export const fetchRecipesByPreferences = async (preferences) => {
   try {
-    const { dietary, cuisine, skill } = preferences
+    const { dietary, cuisine } = preferences
     
     let endpoint = ''
     
@@ -14,19 +14,19 @@ export const fetchRecipesByPreferences = async (preferences) => {
     } else if (dietary === 'vegan') {
       endpoint = `${API_BASE}/filter.php?c=Vegan`
     } else if (cuisine && cuisine !== 'any') {
-      // Filter by cuisine
+      // Filter by cuisine (area)
       endpoint = `${API_BASE}/filter.php?a=${cuisine}`
     } else {
-      // Get random selection if no specific filters
-      endpoint = `${API_BASE}/search.php?s=`
+      // Get multiple random recipes instead of empty search
+      return await getRandomRecipes(15)
     }
     
     const response = await fetch(endpoint)
     const data = await response.json()
     
-    if (!data.meals) {
+    if (!data.meals || data.meals.length === 0) {
       // If no results, get random meals
-      return await getRandomRecipes(10)
+      return await getRandomRecipes(15)
     }
     
     // Fetch full details for each recipe (API only returns basic info in filter)
@@ -38,7 +38,7 @@ export const fetchRecipesByPreferences = async (preferences) => {
     
   } catch (error) {
     console.error('Error fetching recipes:', error)
-    return []
+    return await getRandomRecipes(10)
   }
 }
 
